@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>APS_DAC2021_2</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:growl>
+
+		<p:panel>
+			<p:commandButton value="Voltar" action="index" />
+
+			<p:commandButton value="Quantitativo"
+				action="#{lanceBean.exibirQuantitativo}" mtype="button"
+				onclick="PF('dlg1').show();" update="formQuantidade" />
+		</p:panel>
+
+		<p:panel header="Listagem de Lances">
+			<p:dataTable value="#{lanceBean.lances}" var="l"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" styleClass="p-mt-2">
+
+				<p:column headerText="ID">
+					<p:outputLabel value="#{l.id}" />
+				</p:column>
+
+				<p:column headerText="Valor 1">
+					<p:outputLabel value="#{l.v1}" />
+				</p:column>
+
+				<p:column headerText="Valor 2">
+					<p:outputLabel value="#{l.v2}" />
+				</p:column>
+
+				<p:column headerText="Valor 3">
+					<p:outputLabel value="#{l.v3}" />
+				</p:column>
+
+				<p:column headerText="Descrição">
+					<p:outputLabel value="#{l.descricao}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:panelGrid>
+						<p:column>
+							<p:commandButton value="Editar" action="editar" ajax="false">
+								<f:setPropertyActionListener value="#{l}"
+									target="#{lanceBean.lance}" />
+							</p:commandButton>
+
+							<p:column>
+								<p:commandButton value="Excluir" action="#{lanceBean.excluir}"
+									update="messages" ajax="false">
+									<f:setPropertyActionListener value="#{l}"
+										target="#{lanceBean.lance}" />
+								</p:commandButton>
+							</p:column>
+
+						</p:column>
+					</p:panelGrid>
+				</p:column>
+			</p:dataTable>
+
+			<p:outputLabel value="By: Ermerson Justino" />
+		</p:panel>
+	</h:form>
+
+	<!-- Quantidade caixa de dialog -->
+
+	<p:dialog header="Quantitativo" widgetVar="dlg1" minHeight="40">
+
+		<h:form id="formQuantidade">
+			<p:panelGrid columns="2">
+
+				<p:row>
+					<p:column>Numero</p:column>
+				</p:row>
+				<p:row>
+					<p:column>Quantidade</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<p:outputLabel value="1" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lanceBean.num1}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="2" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lanceBean.num2}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="3" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lanceBean.num3}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="4" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lanceBean.num4}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="5" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lanceBean.num5}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Total" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lanceBean.total}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</h:form>
+
+	</p:dialog>
+</h:body>
+</html>
